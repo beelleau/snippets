@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: date-func
+# key: -date-func
+# --
+date() {
+  # See: 'man strftime' for format.
+  printf "%(\$1)T\\n" "-1"
+  # to get YYYY-MM-DD-HH:mm:ss
+  # date "%F-%T"
+}
+$0

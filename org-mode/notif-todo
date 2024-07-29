@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: notif-todo
+# key: -notif-todo
+# --
+
+# -*- mode: org -*-
+#+title:        TODO
+#+notif-id:     todo
+#+startup:      showall
+#+archive:      .Archive/%s_done::
+
+$0

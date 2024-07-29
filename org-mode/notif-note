@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: notif-note
+# key: -notif-note
+# --
+
+# -*- mode: org -*-
+#+title:        ${1:title}
+#+tags:         `(file-name-nondirectory (directory-file-name (file-name-directory buffer-file-name)))` ${2:}
+#+date:         `(format-time-string "%B %d %Y T%H:%M")`
+#+notif-id:     `(concat "N-" (secure-hash 'sha1 (buffer-name)))`
+#+startup:      overview
+
+$0

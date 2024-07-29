@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: shunit-basic
+# key: -shunit-basic
+# --
+
+local result="" expect="$0"
+result=$()
+assertEquals "$expect" "$result"

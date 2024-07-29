@@ -1,0 +1,68 @@
+# -*- mode: snippet -*-
+# name: bash-boilerplate
+# key: -bash-boilerplate
+# --
+
+#!/usr/bin/env bash
+#
+# <name> :: <short description
+# requires: bash x.x+
+
+err() {
+  # send errors standard error
+  echo "[\${0##*/}] error: $*" >&2
+}
+
+show_help() {
+  # help option text
+  echo "Usage: \${0##*/} [OPTION] REQUIRED"
+  echo "Options:"
+  echo "  -h, --help    Show this help menu"
+}
+
+_parse_options() {
+  # parse arguments and assign variables, arrays
+
+  # check for long "--help"
+  if [[ "\$1" == "--help" ]]; then
+    show_help
+    showed_help="1"
+    return 0
+  fi
+
+  local opt=""
+  while getopts ":h" opt; do
+    case "$opt" in
+      h)
+        show_help
+        showed_help="1"
+        return 0
+        ;;
+      :)
+        err "option -$OPTARG requires an argument"
+        return 1
+        ;;
+      \?)
+        err "Invalid option: -$OPTARG"
+        show_help
+        return 1
+        ;;
+    esac
+  done
+}
+$0
+main() {
+  set -eu
+  set -o pipefail
+  trap 'echo -e "\nSIGINT Received... exiting"; exit 130' SIGINT
+
+  # define variables that can be assigned in _parse_options
+  local showed_help=""
+  if [[ $# -gt 0 ]]; then
+    _parse_options "$@"
+  fi
+  [[ "$showed_help" ]] && exit 0
+  # shift $((OPTIND - 1)) # shift $@ past optional flags
+}
+
+main "$@"

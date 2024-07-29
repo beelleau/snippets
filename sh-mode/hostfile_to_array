@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: hostfile_to_array
+# key: -hostfile_to_array
+# --
+
+hostfile_to_array() {
+  # convert each line in a file to an array element
+  # skip lines that start with # or [, skip blank lines
+  # trim leading and trailing whitespace
+  #
+  # ARG \$1: filename of hostlist
+  # RET: prints lines that represent valid hostnames
+
+  sed -E '/^[#\[]|^$/d; s/^[[:space:]]+|[[:space:]]+$//g' "$1"
+}
+
+$0
