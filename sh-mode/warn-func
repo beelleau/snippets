@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: warn-func
+# key: -warn-func
+# --
+
+warn() {
+  # send warnings to standard error
+  echo "[$\{0##*/\}] warning: $*" >&2
+}
+$0
